@@ -1,0 +1,941 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Place Your Order</title>
+
+<style>
+body{
+font-family:Arial,sans-serif;
+background:#f5f5f5;
+margin:0;
+padding:20px;
+}
+
+.container{
+max-width:700px;
+margin:auto;
+background:#fff;
+padding:20px;
+border-radius:10px;
+box-shadow:0 2px 10px rgba(0,0,0,.2);
+}
+
+h1{
+text-align:center;
+color:#003366;
+}
+
+label{
+display:block;
+margin-top:15px;
+font-weight:bold;
+}
+
+input,select,textarea{
+width:100%;
+padding:10px;
+margin-top:5px;
+border:1px solid #ccc;
+border-radius:5px;
+box-sizing:border-box;
+}
+
+button{
+margin-top:20px;
+width:100%;
+padding:15px;
+background:#28a745;
+color:#fff;
+border:none;
+border-radius:5px;
+font-size:18px;
+cursor:pointer;
+}
+
+button:hover{
+background:#218838;
+}
+
+#price{
+font-size:20px;
+font-weight:bold;
+color:#0055aa;
+margin-top:15px;
+text-align:center;
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Place Order</h1>
+
+<form id="orderForm">
+
+<label>Full Name</label>
+<input type="text" id="name" required>
+
+<label>Email</label>
+<input type="email" id="email" required>
+
+<label>Phone / WhatsApp</label>
+<input type="text" id="phone" required>
+
+<label>Paper Title</label>
+<input type="text" id="title" required>
+
+<label>Subject</label>
+<input type="text" id="subject" required>
+
+<label>Academic Level</label>
+<select id="level">
+<option>High School</option>
+<option>College</option>
+<option>Undergraduate</option>
+<option>Masters</option>
+<option>PhD</option>
+<option>None</option>
+</select>
+
+<label>Number of Pages</label>
+<input type="number" id="pages" value="1" min="1">
+
+<label>Deadline</label>
+<input type="date" id="deadline">
+
+<label>Instructions</label>
+<textarea id="instructions" rows="5"></textarea>
+   
+<label for="referencing">Referencing Style</label>
+
+<select id="referencing" name="referencing" required>
+
+    <option value="">-- Select Referencing Style --</option>
+
+    <option value="APA">
+        APA
+    </option>
+
+    <option value="MLA">
+        MLA
+    </option>
+
+    <option value="Chicago">
+        Chicago
+    </option>
+
+    <option value="Harvard">
+        Harvard
+    </option>
+
+    <option value="IEEE">
+        IEEE
+    </option>
+
+    <option value="Vancouver">
+        Vancouver
+    </option>
+
+    <option value="OSCOLA">
+        OSCOLA
+    </option>
+
+    <option value="Other">
+        Other
+    </option>
+
+</select>
+<label>Upload Files</label>
+<input type="file" id="file">
+   <label for="country">Country</label>
+
+<select id="country" name="country" required>
+    <option value="">-- Select Your Country --</option>
+    <option value="Australia" data-code="+61">🇦🇺 Australia</option>
+    <option value="Bangladesh" data-code="+880">🇧🇩 Bangladesh</option>
+    <option value="Botswana" data-code="+267">🇧🇼 Botswana</option>
+    <option value="Canada" data-code="+1">🇨🇦 Canada</option>
+    <option value="Ethiopia" data-code="+251">🇪🇹 Ethiopia</option>
+    <option value="France" data-code="+33">🇫🇷 France</option>
+    <option value="Germany" data-code="+49">🇩🇪 Germany</option>
+    <option value="Ghana" data-code="+233">🇬🇭 Ghana</option>
+    <option value="India" data-code="+91">🇮🇳 India</option>
+    <option value="Ireland" data-code="+353">🇮🇪 Ireland</option>
+    <option value="Kenya" data-code="+254">🇰🇪 Kenya</option>
+    <option value="Malawi" data-code="+265">🇲🇼 Malawi</option>
+    <option value="Mozambique" data-code="+258">🇲🇿 Mozambique</option>
+    <option value="Namibia" data-code="+264">🇳🇦 Namibia</option>
+    <option value="Netherlands" data-code="+31">🇳🇱 Netherlands</option>
+    <option value="New Zealand" data-code="+64">🇳🇿 New Zealand</option>
+    <option value="Nigeria" data-code="+234">🇳🇬 Nigeria</option>
+    <option value="Pakistan" data-code="+92">🇵🇰 Pakistan</option>
+    <option value="Philippines" data-code="+63">🇵🇭 Philippines</option>
+    <option value="Rwanda" data-code="+250">🇷🇼 Rwanda</option>
+    <option value="South Africa" data-code="+27">🇿🇦 South Africa</option>
+    <option value="Tanzania" data-code="+255">🇹🇿 Tanzania</option>
+    <option value="Uganda" data-code="+256">🇺🇬 Uganda</option>
+    <option value="United Arab Emirates" data-code="+971">🇦🇪 United Arab Emirates</option>
+    <option value="United Kingdom" data-code="+44">🇬🇧 United Kingdom</option>
+    <option value="United States" data-code="+1">🇺🇸 United States</option>
+    <option value="Zambia" data-code="+260">🇿🇲 Zambia</option>
+    <option value="Zimbabwe" data-code="+263">🇿🇼 Zimbabwe</option>
+    <option value="Other" data-code="">🌍 Other</option>
+</select>
+
+<br><br>
+
+<label for="phone">Phone Number</label>
+
+<div style="display:flex; gap:8px; max-width:500px;">
+
+    <!-- Automatically changing country code -->
+    <input
+        type="text"
+        id="countryCode"
+        name="countryCode"
+        value=""
+        readonly
+        style="width:80px;"
+        placeholder="+Code"
+    >
+
+    <!-- Phone number -->
+    <input
+        type="tel"
+        id="phone"
+        name="phone"
+        placeholder="Enter phone number"
+        required
+        style="flex:1;"
+    >
+
+</div>
+
+<script>
+const country = document.getElementById("country");
+const countryCode = document.getElementById("countryCode");
+
+country.addEventListener("change", function () {
+
+    const selectedOption = this.options[this.selectedIndex];
+
+    const code = selectedOption.getAttribute("data-code");
+
+    countryCode.value = code || "";
+
+});
+</script>
+
+<div id="price">Total Price: $11</div>
+<label>Payment Method</label>
+<select id="paymentMethod">
+   <option value="paypal">PayPal</option> 
+    <option value="mpesa">M-Pesa</option>
+    <option value="card">Credit/Debit Card</option>
+</select>
+
+<!-- PAYMENT INSTRUCTIONS -->
+
+<div id="paymentInstructions" class="payment-box">
+
+    <h3>Payment Instructions</h3>
+
+    <p id="paymentText">
+        Please select a payment method to see payment instructions.
+    </p>
+
+</div>
+
+<style>
+.payment-box{
+    margin-top:20px;
+    padding:20px;
+    background:#f5f7fa;
+    border-left:5px solid #0056b3;
+    border-radius:8px;
+}
+
+.payment-box h3{
+    color:#003366;
+    margin-top:0;
+}
+
+.payment-box p{
+    color:#555;
+    line-height:1.6;
+}
+
+.payment-box a{
+    color:#0056b3;
+    font-weight:bold;
+    text-decoration:none;
+}
+</style>
+
+<button type="submit">Submit Order</button>
+
+<!-- ABOUT US SECTION -->
+<section class="about-us">
+    <h2>About Us</h2>
+
+    <p>
+        We are a professional academic writing service dedicated to
+        providing high-quality, well-researched and original academic
+        content. Founded in 2016, we have been helping clients with
+        reliable writing, editing, proofreading and research support.
+    </p>
+
+    <p>
+        Our goal is to provide professional, confidential and timely
+        services tailored to each client's requirements.
+    </p>
+</section>
+
+<style>
+.about-us{
+    max-width:700px;
+    margin:20px auto;
+    background:#fff;
+    padding:25px;
+    border-radius:10px;
+    box-shadow:0 2px 10px rgba(0,0,0,0.12);
+}
+
+.about-us h2{
+    text-align:center;
+    color:#174a7e;
+    margin-bottom:15px;
+}
+
+.about-us p{
+    color:#555;
+    font-size:14px;
+    line-height:1.7;
+    margin-bottom:12px;
+}
+</style>
+
+  
+<div class="contact-info">
+<h3>Contact Information</h3>
+    <p class="contact-intro">
+      Have questions or need help with your academic writing order?
+      Get in touch with us.
+    </p>
+
+    <div class="contact-details">
+
+      <!-- Address -->
+      <div class="contact-box">
+        <div class="icon">📍</div>
+        <h3>Our Address</h3>
+        <p>
+          Kapsabet, Kenya<br>
+          P.O. Box 950-30300<br>
+          Kapsabet, Kenya
+        </p>
+      </div>
+
+      <!-- Phone -->
+      <div class="contact-box">
+        <div class="icon">📞</div>
+        <h3>Phone</h3>
+        <p>
+          <a href="tel:+254706986818">+254 706 986 818</a>
+        </p>
+      </div>
+
+      <!-- Email -->
+      <div class="contact-box">
+        <div class="icon">✉️</div>
+        <h3>Email</h3>
+        <p>
+          <a href="mailto: nornica521@gmail.com">
+            nornica521@gmail.com
+          </a>
+        </p>
+      </div>
+
+      <!-- Working Hours -->
+<div class="contact-box">
+  <div class="icon">🕒</div>
+  <h3>Working Hours</h3>
+  <p>
+    <strong>Open 24/7</strong><br>
+    Monday – Sunday<br>
+    Available anytime
+  </p>
+</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<style>
+.contact-section {
+  background: #f5f7fa;
+  padding: 60px 20px;
+  text-align: center;
+}
+
+.contact-container {
+  max-width: 1100px;
+  margin: auto;
+}
+
+.contact-section h2 {
+  font-size: 34px;
+  margin-bottom: 10px;
+  color: #222;
+}
+
+.contact-intro {
+  color: #666;
+  margin-bottom: 40px;
+}
+
+.contact-details {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.contact-box {
+  background: #fff;
+  padding: 30px 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+}
+
+.contact-box .icon {
+  font-size: 35px;
+  margin-bottom: 15px;
+}
+
+.contact-box h3 {
+  margin-bottom: 10px;
+  color: #222;
+}
+
+.contact-box p {
+  color: #666;
+  line-height: 1.7;
+}
+
+.contact-box a {
+  color: #0066cc;
+  text-decoration: none;
+}
+
+.contact-box a:hover {
+  text-decoration: underline;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .contact-details {
+    grid-template-columns: 1fr;
+  }
+
+  .contact-section h2 {
+    font-size: 28px;
+  }
+}
+</style>  
+
+</form>
+
+</div>
+
+<script>
+const level = document.getElementById("level");
+const pages = document.getElementById("pages");
+const deadline = document.getElementById("deadline");
+const price = document.getElementById("price");
+
+function calculatePrice() {
+
+    // Price per page according to academic level
+    const levelPrices = {
+        "High School": 10,
+        "College": 12,
+        "Undergraduate": 15,
+        "Masters": 20,
+        "PhD": 25,
+        "None": 10
+    };
+
+    // Get selected academic level
+    const pricePerPage = levelPrices[level.value] || 10;
+
+    // Number of pages
+    const numberOfPages = parseInt(pages.value) || 1;
+
+    // Base price
+    let total = pricePerPage * numberOfPages;
+
+    // Deadline surcharge
+    if (deadline.value) {
+
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+
+        const selectedDate = new Date(deadline.value + "T00:00:00");
+
+        const difference =
+            selectedDate.getTime() - today.getTime();
+
+        const daysUntilDeadline =
+            Math.ceil(difference / (1000 * 60 * 60 * 24));
+
+        // Urgent deadline pricing
+        if (daysUntilDeadline <= 1) {
+            total += 20;
+        }
+        else if (daysUntilDeadline <= 3) {
+            total += 15;
+        }
+        else if (daysUntilDeadline <= 7) {
+            total += 10;
+        }
+        else if (daysUntilDeadline <= 14) {
+            total += 5;
+        }
+    }
+
+    price.innerHTML = "Total Price: $" + total.toFixed(2);
+}
+
+// Recalculate when academic level changes
+level.addEventListener("change", calculatePrice);
+
+// Recalculate while pages are changed
+pages.addEventListener("input", calculatePrice);
+
+// Recalculate when deadline changes
+deadline.addEventListener("change", calculatePrice);
+
+// Calculate initial price
+calculatePrice();
+
+document.getElementById("orderForm").addEventListener("submit",function(e){
+e.preventDefault();
+alert("Order submitted successful");
+});
+</script>
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
+import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "YOUR_API_KEY",
+  authDomain: "YOUR_PROJECT.firebaseapp.com",
+  projectId: "YOUR_PROJECT_ID",
+  storageBucket: "YOUR_PROJECT.appspot.com",
+  messagingSenderId: "YOUR_SENDER_ID",
+  appId: "YOUR_APP_ID"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+document.getElementById("orderForm").addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  try {
+    await addDoc(collection(db, "orders"), {
+      name: document.getElementById("name").value,
+      email: document.getElementById("email").value,
+      phone: document.getElementById("phone").value,
+      title: document.getElementById("title").value,
+      subject: document.getElementById("subject").value,
+      level: document.getElementById("level").value,
+      pages: document.getElementById("pages").value,
+      deadline: document.getElementById("deadline").value,
+      instructions: document.getElementById("instructions").value,
+      created: new Date()
+    });
+
+    alert("Order submitted successfully!");
+    document.getElementById("orderForm").reset();
+
+  } catch (err) {
+    alert("Error: " + err.message);
+  }
+});
+</script>
+<!-- CHATBOT BUTTON -->
+<div class="chatbot-container">
+
+  <!-- Chat Window -->
+  <div class="chat-window" id="chatWindow">
+
+    <div class="chat-header">
+      <div>
+        <strong>Academic Writing Assistant</strong>
+        <span>● Online</span>
+      </div>
+      <button onclick="toggleChat()">✖</button>
+    </div>
+
+    <div class="chat-messages" id="chatMessages">
+
+      <div class="bot-message">
+        👋 Hello! Welcome to our Academic Writing Service.
+        <br><br>
+        How can I help you today?
+      </div>
+
+      <div class="quick-options">
+        <button onclick="quickReply('Pricing')">💰 Pricing</button>
+        <button onclick="quickReply('Place an order')">📝 Place Order</button>
+        <button onclick="quickReply('Services')">📚 Services</button>
+        <button onclick="quickReply('Contact')">📞 Contact</button>
+      </div>
+
+    </div>
+
+    <div class="chat-input">
+      <input 
+        type="text" 
+        id="userInput" 
+        placeholder="Type your message..."
+        onkeypress="handleKeyPress(event)"
+      >
+      <button onclick="sendMessage()">Send</button>
+    </div>
+
+  </div>
+
+
+  <!-- Floating Chat Button -->
+  <button class="chat-button" onclick="toggleChat()">
+    💬
+  </button>
+
+</div>
+
+
+<style>
+
+/* CHATBOT CONTAINER */
+.chatbot-container {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 9999;
+  font-family: Arial, sans-serif;
+}
+
+/* CHAT BUTTON */
+.chat-button {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border: none;
+  background: #0056b3;
+  color: white;
+  font-size: 28px;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+
+/* CHAT WINDOW */
+.chat-window {
+  display: none;
+  width: 330px;
+  height: 450px;
+  background: white;
+  position: absolute;
+  bottom: 75px;
+  right: 0;
+  border-radius: 15px;
+  box-shadow: 0 5px 25px rgba(0,0,0,0.3);
+  overflow: hidden;
+  flex-direction: column;
+}
+
+/* CHAT HEADER */
+.chat-header {
+  background: #0056b3;
+  color: white;
+  padding: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.chat-header strong {
+  display: block;
+}
+
+.chat-header span {
+  font-size: 12px;
+  color: #b6ffb6;
+}
+
+.chat-header button {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+/* MESSAGES */
+.chat-messages {
+  flex: 1;
+  padding: 15px;
+  overflow-y: auto;
+  background: #f5f5f5;
+}
+
+/* BOT MESSAGE */
+.bot-message {
+  background: #e3eaf2;
+  padding: 10px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  max-width: 80%;
+}
+
+/* USER MESSAGE */
+.user-message {
+  background: #0056b3;
+  color: white;
+  padding: 10px;
+  border-radius: 10px;
+  margin-left: auto;
+  margin-bottom: 10px;
+  max-width: 80%;
+}
+
+/* QUICK BUTTONS */
+.quick-options button {
+  display: block;
+  width: 100%;
+  margin: 6px 0;
+  padding: 8px;
+  border: 1px solid #0056b3;
+  background: white;
+  color: #0056b3;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+/* INPUT AREA */
+.chat-input {
+  display: flex;
+  border-top: 1px solid #ddd;
+}
+
+.chat-input input {
+  flex: 1;
+  padding: 12px;
+  border: none;
+  outline: none;
+}
+
+.chat-input button {
+  background: #0056b3;
+  color: white;
+  border: none;
+  padding: 0 15px;
+  cursor: pointer;
+}
+
+</style>
+
+
+<script>
+
+/* OPEN/CLOSE CHAT */
+function toggleChat() {
+
+  const chatWindow = document.getElementById("chatWindow");
+
+  if (chatWindow.style.display === "flex") {
+    chatWindow.style.display = "none";
+  } else {
+    chatWindow.style.display = "flex";
+  }
+
+}
+
+
+/* SEND MESSAGE */
+function sendMessage() {
+
+  const input = document.getElementById("userInput");
+  const message = input.value.trim();
+
+  if (message === "") return;
+
+  addUserMessage(message);
+
+  input.value = "";
+
+  setTimeout(() => {
+    botReply(message);
+  }, 500);
+
+}
+
+
+/* ENTER KEY */
+function handleKeyPress(event) {
+
+  if (event.key === "Enter") {
+    sendMessage();
+  }
+
+}
+
+
+/* ADD USER MESSAGE */
+function addUserMessage(message) {
+
+  const chatMessages = document.getElementById("chatMessages");
+
+  const messageDiv = document.createElement("div");
+
+  messageDiv.className = "user-message";
+
+  messageDiv.innerText = message;
+
+  chatMessages.appendChild(messageDiv);
+
+  chatMessages.scrollTop = chatMessages.scrollHeight;
+
+}
+
+
+/* QUICK REPLY */
+function quickReply(message) {
+
+  addUserMessage(message);
+
+  setTimeout(() => {
+    botReply(message);
+  }, 400);
+
+}
+
+
+/* BOT RESPONSE */
+function botReply(message) {
+
+  const chatMessages = document.getElementById("chatMessages");
+
+  let reply = "";
+
+  message = message.toLowerCase();
+
+
+  if (message.includes("price") || message.includes("pricing")) {
+
+    reply = "💰 Our prices depend on the academic level, deadline, and number of pages. Please visit our Order page for an instant quote.";
+
+  }
+
+  else if (message.includes("order")) {
+
+    reply = "📝 You can place an order through our 'Place Your Order' page. Fill in your assignment details and submit the form.";
+
+  }
+
+  else if (message.includes("service")) {
+
+    reply = "📚 We offer Essay Writing, Research Papers, Case Studies, Dissertations, Editing, Proofreading, and more.";
+
+  }
+
+  else if (message.includes("contact")) {
+
+    reply = "📞 You can contact our support team through WhatsApp, email, or the Contact Us page.";
+
+  }
+
+  else if (message.includes("hello") || message.includes("hi")) {
+
+    reply = "👋 Hello! How can I assist you with your academic writing needs today?";
+
+  }
+
+  else if (message.includes("deadline")) {
+
+    reply = "⏰ We work with different deadlines. Please include your deadline when placing an order.";
+
+  }
+
+  else {
+
+    reply = "Thank you for your message! Our support team will assist you. You can also use the quick options above.";
+
+  }
+
+
+  const messageDiv = document.createElement("div");
+
+  messageDiv.className = "bot-message";
+
+  messageDiv.innerText = reply;
+
+  chatMessages.appendChild(messageDiv);
+
+  chatMessages.scrollTop = chatMessages.scrollHeight;
+
+}
+
+
+</script>
+<!-- PAYMENT INSTRUCTIONS -->
+<script>
+const paymentMethod = document.getElementById("paymentMethod");
+const paymentText = document.getElementById("paymentText");
+
+paymentMethod.addEventListener("change", function () {
+
+    if (this.value === "paypal") {
+
+        paymentText.innerHTML =
+        "💰 <strong>PayPal Payment</strong><br><br>" +
+        "Send your payment to our PayPal account:<br>" +
+        "<strong>nornica521@gmail.com</strong><br><br>" +
+        "After payment, please send your PayPal transaction confirmation to our email.";
+
+    }
+
+    else if (this.value === "mpesa") {
+
+        paymentText.innerHTML =
+        "📱 <strong>M-Pesa Payment</strong><br><br>" +
+        "Send your payment to:<br>" +
+        "<strong>0706986818</strong><br><br>" +
+        "Account/Name: <strong>ACADEMIC WRITING</strong><br><br>" +
+        "After payment, please send your M-Pesa confirmation message to our email.";
+
+    }
+
+    else if (this.value === "card") {
+
+        paymentText.innerHTML =
+        "💳 <strong>Credit/Debit Card Payment</strong><br><br>" +
+        "Card payments are processed securely through our payment gateway.<br><br>" +
+        "<a href=\"YOUR-PAYMENT-LINK\" target=\"_blank\" rel=\"noopener\">" +
+        "Click here to pay securely by card" +
+        "</a>";
+
+    }
+
+});
+</script>
+</body>
+</html>
